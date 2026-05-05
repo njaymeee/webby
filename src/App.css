@@ -152,7 +152,7 @@ body {
 
 /* ─── SECTION 2: Socials ─── */
 .section-socials {
-  padding: 6rem 2rem;
+  padding: 6rem 5rem;
   background: #0d0d14;
   text-align: center;
 }
@@ -207,76 +207,37 @@ body {
 .social-card.tiktok:hover   { background: rgba(105,201,208,0.15);box-shadow: 0 8px 30px rgba(105,201,208,0.2); }
 .social-card.x-twitter:hover{ background: rgba(255,255,255,0.1); box-shadow: 0 8px 30px rgba(255,255,255,0.15); }
 
-/* ─── SECTION 3: About / Hobbies & Skills ─── */
+/* ─── SECTION 3: Hobbies ─── */
 .section-about {
   padding: 6rem 2rem;
   background: #0a0a0f;
 }
 
-.about-grid {
+.hobby-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
   max-width: 900px;
   margin: 0 auto;
-}
-
-.about-block .section-title {
-  text-align: left;
-  margin-bottom: 1.5rem;
-}
-
-.hobby-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
 }
 
 .hobby-item {
   background: var(--glass);
   border: 1px solid var(--glass-border);
-  padding: 0.75rem 1.2rem;
-  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  border-radius: 14px;
   font-size: 0.95rem;
   color: var(--text);
-  transition: background 0.2s ease, transform 0.2s ease;
+  text-align: center;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
 }
 
 .hobby-item:hover {
-  background: rgba(201,168,76,0.1);
-  transform: translateX(6px);
-}
-
-.skills-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.skill-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.skill-label {
-  font-size: 0.88rem;
-  color: var(--muted);
-  font-weight: 500;
-}
-
-.skill-bar {
-  height: 6px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.skill-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), #e8c97a);
-  border-radius: 999px;
-  transition: width 1s ease;
+  background: rgba(201, 168, 76, 0.1);
+  border-color: rgba(201, 168, 76, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(201, 168, 76, 0.12);
 }
 
 /* ─── Responsive ─── */

@@ -1,0 +1,47 @@
+.footer {
+    width: 100%;
+    background: #0a0a0f;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 1.5rem 2.5rem;
+}
+
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Left - Creator */
+.footer-creator {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: 'DM Sans', sans-serif;
+}
+
+.creator-name {
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 600;
+}
+
+/* Center - All rights reserved (glowing blue) */
+.footer-rights {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.85rem;
+    font-family: 'DM Sans', sans-serif;
+    color: #4db8ff;
+    text-shadow:
+        0 0 8px rgba(77, 184, 255, 0.8),
+        0 0 20px rgba(77, 184, 255, 0.5),
+        0 0 40px rgba(77, 184, 255, 0.3);
+    white-space: nowrap;
+}
+
+/* Right spacer to balance the layout */
+.footer-spacer {
+    width: 160px;
+}
