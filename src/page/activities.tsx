@@ -2,18 +2,18 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { fetchNowPlaying, type NowPlayingData } from '../utils/spotifyNowPlaying'
 import './activities.css'
 
-// ✅ ADD YOUR ROBLOX IMAGES HERE
+// ✅  ROBLOX IMAGES HERE
 const ROBLOX_IMAGES = [
-  { src: '/assets/roblox1.jpg', caption: 'Roblox Showcase 1' },
-  { src: '/assets/roblox2.jpg', caption: 'Roblox Showcase 2' },
-  { src: '/assets/roblox3.jpg', caption: 'Roblox Showcase 3' },
+  { src: '/assets/robloximg/roblox1.jpg', caption: 'Roblox Showcase 1' },
+  { src: '/assets/robloximg/roblox2.jpg', caption: 'Roblox Showcase 2' },
+  { src: '/assets/robloximg/roblox3.jpg', caption: 'Roblox Showcase 3' },
 ]
 
-// ✅ ADD YOUR PHOTOGRAPHY IMAGES HERE
+// PHOTOGRAPHY IMAGES HERE
 const PHOTO_IMAGES = [
-  { src: '/assets/photo1.jpg', caption: 'Photography 1' },
-  { src: '/assets/photo2.jpg', caption: 'Photography 2' },
-  { src: '/assets/photo3.jpg', caption: 'Photography 3' },
+  { src: '/assets/photography/photo1.jpg', caption: 'Photography 1' },
+  { src: '/assets/photography/photo2.jpg', caption: 'Photography 2' },
+  { src: '/assets/photography/photo3.jpg', caption: 'Photography 3' },
 ]
 
 // ─── Lightbox ───
