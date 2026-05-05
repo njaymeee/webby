@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --accent: #c9a84c;
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --text: #f0ece4;
+  --muted: rgba(240, 236, 228, 0.55);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #0a0a0f;
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+.main {
+  width: 100%;
+}
+
+/* ─── SECTION 1: Hero / Profile Card ─── */
+.section-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('assets/Midnight.jpg') center center / cover no-repeat;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+}
+
+.section-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+}
+
+.profile-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 3rem 3.5rem;
+  max-width: 820px;
+  width: 100%;
+  box-shadow: 0 8px 60px rgba(0,0,0,0.4);
+}
+
+/* Profile image glow on hover */
+.profile-img-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--glass-border);
+  display: block;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.4s ease;
+}
+
+.glow-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+  filter: blur(12px);
+}
+
+.profile-img-wrapper:hover .glow-ring {
+  opacity: 0.8;
+}
+
+.profile-img-wrapper:hover .profile-img {
+  transform: scale(1.04);
+}
+
+/* Card right */
+.card-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.profile-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.profile-age {
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.profile-bio {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 380px;
+}
+
+.profile-extras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  color: var(--accent);
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* ─── SECTION 2: Socials ─── */
+.section-socials {
+  padding: 6rem 2rem;
+  background: #0d0d14;
+  text-align: center;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--text);
+  margin-bottom: 2.5rem;
+}
+
+.socials-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.social-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.4rem 1.8rem;
+  border-radius: 16px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  text-decoration: none;
+  color: white;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  width: 110px;
+}
+
+.social-card svg {
+  width: 28px;
+  height: 28px;
+}
+
+.social-card:hover {
+  transform: translateY(-6px);
+}
+
+.social-card.spotify:hover  { background: rgba(30,215,96,0.15);  box-shadow: 0 8px 30px rgba(30,215,96,0.2); }
+.social-card.facebook:hover { background: rgba(24,119,242,0.15); box-shadow: 0 8px 30px rgba(24,119,242,0.2); }
+.social-card.pinterest:hover{ background: rgba(230,0,35,0.15);   box-shadow: 0 8px 30px rgba(230,0,35,0.2); }
+.social-card.instagram:hover{ background: rgba(225,48,108,0.15); box-shadow: 0 8px 30px rgba(225,48,108,0.2); }
+.social-card.tiktok:hover   { background: rgba(105,201,208,0.15);box-shadow: 0 8px 30px rgba(105,201,208,0.2); }
+.social-card.x-twitter:hover{ background: rgba(255,255,255,0.1); box-shadow: 0 8px 30px rgba(255,255,255,0.15); }
+
+/* ─── SECTION 3: About / Hobbies & Skills ─── */
+.section-about {
+  padding: 6rem 2rem;
+  background: #0a0a0f;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-block .section-title {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.hobby-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.hobby-item {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  padding: 0.75rem 1.2rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hobby-item:hover {
+  background: rgba(201,168,76,0.1);
+  transform: translateX(6px);
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.skill-label {
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.skill-bar {
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #e8c97a);
+  border-radius: 999px;
+  transition: width 1s ease;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 700px) {
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+  }
+  .profile-extras { justify-content: center; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-block .section-title { text-align: center; }
+}
