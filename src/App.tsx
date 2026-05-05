@@ -1,12 +1,11 @@
-import header from './components/header.jsx'
+import Header from './components/header.tsx'
 import './App.css'
 
 function App() {
 
   return (
     <>
-      <header/>
-
+      <Header/>
     </>
   )
 }

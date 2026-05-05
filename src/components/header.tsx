@@ -1,6 +1,7 @@
 
 function Header() {
-    <>
+    return(
+            <>
         <header>
             <nav>
                 <div className="container">
@@ -15,6 +16,7 @@ function Header() {
             </nav>
         </header>
     </>
+    )
 }
 
 export default Header
