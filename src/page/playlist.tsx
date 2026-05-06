@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { fetchPlaylist, type SpotifyPlaylist } from '../utils/spotify'
-import './Playlist.css'
+import './playlist.css'
 
 // ✅ ONLY EDIT THESE — paste your Spotify playlist IDs here
 const PLAYLIST_IDS: string[] = [
