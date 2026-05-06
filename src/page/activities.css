@@ -11,7 +11,7 @@
 .act-bg {
   position: fixed;
   inset: 0;
-  background: url('/Midnight.jpg') center center / cover no-repeat;
+  background: url('../assets/Midnight.jpg') center center / cover no-repeat;
   z-index: -2;
 }
 
