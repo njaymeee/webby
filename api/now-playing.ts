@@ -4,43 +4,57 @@ const CLIENT_ID = process.env.VITE_SPOTIFY_CLIENT_ID!
 const CLIENT_SECRET = process.env.VITE_SPOTIFY_CLIENT_SECRET!
 const REFRESH_TOKEN = process.env.VITE_SPOTIFY_REFRESH_TOKEN!
 
+async function getAccessToken(): Promise<string> {
+  const res = await fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic ' + Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64'),
+    },
+    body: new URLSearchParams({
+      grant_type: 'refresh_token',
+      refresh_token: REFRESH_TOKEN,
+    }),
+  })
+  const data = await res.json()
+  return data.access_token
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*')
 
   try {
-    // Step 1 - Check env vars are loaded
-    if (!CLIENT_ID || !CLIENT_SECRET || !REFRESH_TOKEN) {
-      return res.status(500).json({ 
-        error: 'Missing env vars',
-        hasClientId: !!CLIENT_ID,
-        hasClientSecret: !!CLIENT_SECRET,
-        hasRefreshToken: !!REFRESH_TOKEN,
-      })
-    }
+    const token = await getAccessToken()
 
-    // Step 2 - Get token and show raw response
-    const tokenRes = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64'),
-      },
-      body: new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: REFRESH_TOKEN,
-      }),
+    const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+      headers: { Authorization: `Bearer ${token}` },
     })
 
-    const rawText = await tokenRes.text()
+    // Show raw response for debugging
+    const rawText = await response.text()
 
-    // Return raw response so we can see exactly what Spotify says
+    if (response.status === 204 || !rawText) {
+      return res.status(200).json({ isPlaying: false })
+    }
+
+    const data = JSON.parse(rawText)
+
+    if (!data?.item) {
+      return res.status(200).json({ isPlaying: false })
+    }
+
     return res.status(200).json({
-      status: tokenRes.status,
-      rawResponse: rawText,
+      isPlaying: data.is_playing,
+      title: data.item.name,
+      artist: data.item.artists.map((a: any) => a.name).join(', '),
+      album: data.item.album.name,
+      albumArt: data.item.album.images?.[0]?.url ?? '',
+      progressMs: data.progress_ms ?? 0,
+      durationMs: data.item.duration_ms ?? 0,
     })
 
   } catch (err) {
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: err instanceof Error ? err.message : 'Unknown error'
     })
   }
