@@ -3,15 +3,15 @@ import { fetchNowPlaying, type NowPlayingData } from '../utils/spotifyNowPlaying
 import './activities.css'
 
 const ROBLOX_IMAGES = [
-  { src: '/assets/robloximg/HiddenHills.png', caption: 'The trail of Hidden Hills Campsite - Hidden Hill, 1989' },
-  { src: '/assets/robloximg/HiddenHills1.png', caption: 'Beneath the surface - Hidden Hill, 1989 ' },
-  { src: '/assets/robloximg/HiddenHills2.png', caption: 'A view from the top - Hidden Hill, 1989' },
+  { src: './assets/robloximg/HiddenHills.png', caption: 'The trail of Hidden Hills Campsite - Hidden Hill, 1989' },
+  { src: './assets/robloximg/HiddenHills1.png', caption: 'Beneath the surface - Hidden Hill, 1989 ' },
+  { src: './assets/robloximg/HiddenHills2.png', caption: 'A view from the top - Hidden Hill, 1989' },
 ]
 
 const PHOTO_IMAGES = [
-  { src: '/assets/photography/photo1.jpg', caption: 'Photography 1' },
-  { src: '/assets/photography/photo2.jpg', caption: 'Photography 2' },
-  { src: '/assets/photography/photo3.jpg', caption: 'Photography 3' },
+  { src: './assets/photography/photo1.jpg', caption: 'Photography 1' },
+  { src: './assets/photography/photo2.jpg', caption: 'Photography 2' },
+  { src: './assets/photography/photo3.jpg', caption: 'Photography 3' },
 ]
 
 // ─── Lightbox ───

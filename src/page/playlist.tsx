@@ -1,19 +1,59 @@
 import { useEffect, useState } from 'react'
-import { fetchPlaylist, type SpotifyPlaylist } from '../utils/spotify'
+import { fetchPlaylist, USE_SPOTIFY_API, type SpotifyPlaylist } from '../utils/spotify'
 import './playlist.css'
 
-// ✅ ONLY EDIT THESE — paste your Spotify playlist IDs here
+// ─────────────────────────────────────────
+// ✅ MANUAL PLAYLISTS — edit these yourself
+// ─────────────────────────────────────────
+const MANUAL_PLAYLISTS: SpotifyPlaylist[] = [
+  {
+    id: '1',
+    name: 'Street Walk at Night',
+    description: 'It was saturday night, my brother and I are walking into those streets. Just seeing the city lights, both of us are just rebellious. Collab: HY_M3S',
+    cover: './assets/spotifycovers/homeLaStreetWalk.jpg', // put your cover image in public/assets/playlists/
+    creator: 'KuwishKian.V, HY_M3S',
+    songCount: 24,
+    hours: 1,
+    minutes: 22,
+    spotifyUrl: 'https://open.spotify.com/playlist/1NK7dtDd3n63TveSWXdOVP',
+  },
+  {
+    id: '2',
+    name: 'Driving at late night.',
+    description: 'drowning myself into daydreaming, earning what I wanted became reality. the late night drives, the nostalgic song hit me so good. I wish I could comeback to my teenage years. The siblings and the circles became my comfort zone, driving along with them at night is so good.',
+    cover: './assets/spotifycovers/Car5.jpg',
+    creator: 'HY_M3S, KuwishKian.V',
+    songCount: 30,
+    hours: 1,
+    minutes: 46,
+    spotifyUrl: 'https://open.spotify.com/playlist/4slv9IGJWzkqxbt0naAtmk',
+  },
+  {
+    id: '3',
+    name: 'Drunk driving at night.',
+    description: "“Your honor, my client doesn't want to kill the vibe.” You're right my lawyer. 😘😊✨",
+    cover: './assets/spotifycovers/Car4.jpg',
+    creator: 'HY_M3S, KuwishKian.V',
+    songCount: 34,
+    hours: 2,
+    minutes: 13,
+    spotifyUrl: 'https://open.spotify.com/playlist/3FGD24VPdy15NsgEHNIFHs',
+  },
+]
+
+// ─────────────────────────────────────────
+// ✅ SPOTIFY API PLAYLISTS — only used when USE_SPOTIFY_API = true
+// ─────────────────────────────────────────
 const PLAYLIST_IDS: string[] = [
   '1NK7dtDd3n63TveSWXdOVP',
   '3FGD24VPdy15NsgEHNIFHs',
   '4slv9IGJWzkqxbt0naAtmk',
 ]
 
-// ✅ Accent colors — one per playlist
 const ACCENT_COLORS: string[] = [
   '#6e8efb',
   '#f5a623',
-  '#f472b6'
+  '#f472b6',
 ]
 
 // ─── Vinyl Disc Component ───
@@ -57,10 +97,7 @@ function PlaylistCard({ playlist, accent, index }: {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Glow layer */}
       <div className="card-glow" />
-
-      {/* Cover + Vinyl */}
       <div className="card-cover-wrapper">
         {playlist.cover
           ? <img src={playlist.cover} alt={playlist.name} className="card-cover" />
@@ -71,8 +108,6 @@ function PlaylistCard({ playlist, accent, index }: {
         </div>
         <div className="card-cover-overlay" />
       </div>
-
-      {/* Info */}
       <div className="card-info">
         <h3 className="card-name">{playlist.name}</h3>
         {playlist.description && playlist.description !== 'No description.' && (
@@ -123,6 +158,14 @@ function Playlist() {
 
   useEffect(() => {
     async function load() {
+      // ✅ Manual mode — no API needed
+      if (!USE_SPOTIFY_API) {
+        setPlaylists(MANUAL_PLAYLISTS)
+        setLoading(false)
+        return
+      }
+
+      // ✅ API mode — fetch from Spotify
       try {
         setLoading(true)
         setError(null)
@@ -139,8 +182,6 @@ function Playlist() {
 
   return (
     <div className="playlist-page">
-
-      {/* Animated wave background */}
       <div className="waves-bg" aria-hidden="true">
         <div className="wave wave1" />
         <div className="wave wave2" />
@@ -148,8 +189,6 @@ function Playlist() {
       </div>
 
       <div className="playlist-content">
-
-        {/* Page Header */}
         <header className="playlist-header">
           <VinylDisc size={72} accent="#a78bfa" spinning={true} />
           <div>
@@ -158,7 +197,6 @@ function Playlist() {
           </div>
         </header>
 
-        {/* Error state */}
         {error && (
           <div className="status-box error">
             <span>⚠️</span>
@@ -167,7 +205,6 @@ function Playlist() {
           </div>
         )}
 
-        {/* Grid */}
         <div className="playlist-grid">
           {loading
             ? PLAYLIST_IDS.map((_, i) => <PlaylistSkeleton key={i} />)
@@ -181,7 +218,6 @@ function Playlist() {
               ))
           }
         </div>
-
       </div>
     </div>
   )
