@@ -17,11 +17,11 @@ async function getAccessToken(): Promise<string> {
     }),
   })
   const data = await res.json()
+  if (!res.ok) throw new Error(`Token error: ${JSON.stringify(data)}`)
   return data.access_token
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Allow CORS for local dev
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET')
 
@@ -50,6 +50,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       durationMs: data.item.duration_ms ?? 0,
     })
   } catch (err) {
-    return res.status(500).json({ error: 'Failed to fetch now playing' })
+    // Return the actual error message for debugging
+    return res.status(500).json({ 
+      error: err instanceof Error ? err.message : 'Unknown error'
+    })
   }
 }
