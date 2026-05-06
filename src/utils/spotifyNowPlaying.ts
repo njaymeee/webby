@@ -1,11 +1,14 @@
 export interface NowPlayingData {
   isPlaying: boolean
+  stopped: boolean
   title: string
   artist: string
   album: string
   albumArt: string
   progressMs: number
   durationMs: number
+  trackId: string
+  timestamp: number
   accentColor: string
 }
 
@@ -20,10 +23,10 @@ export async function getDominantColor(imageUrl: string): Promise<string> {
       const ctx = canvas.getContext('2d')
       if (!ctx) return resolve('#3b82f6')
       ctx.drawImage(img, 0, 0, 50, 50)
-      const data = ctx.getImageData(0, 0, 50, 50).data
+      const d = ctx.getImageData(0, 0, 50, 50).data
       let r = 0, g = 0, b = 0, count = 0
-      for (let i = 0; i < data.length; i += 16) {
-        r += data[i]; g += data[i+1]; b += data[i+2]; count++
+      for (let i = 0; i < d.length; i += 16) {
+        r += d[i]; g += d[i+1]; b += d[i+2]; count++
       }
       resolve(`rgb(${Math.floor(r/count)},${Math.floor(g/count)},${Math.floor(b/count)})`)
     }
@@ -37,9 +40,13 @@ export async function fetchNowPlaying(): Promise<NowPlayingData | null> {
     const res = await fetch('/api/now-playing')
     const data = await res.json()
 
-    if (!data.isPlaying) return null
+    // Not playing or stopped
+    if (!data.isPlaying && data.stopped) return null
+    if (data.error) return null
 
-    const accentColor = data.albumArt ? await getDominantColor(data.albumArt) : '#3b82f6'
+    const accentColor = data.albumArt
+      ? await getDominantColor(data.albumArt)
+      : '#3b82f6'
 
     return { ...data, accentColor }
   } catch {

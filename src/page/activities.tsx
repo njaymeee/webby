@@ -2,14 +2,12 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { fetchNowPlaying, type NowPlayingData } from '../utils/spotifyNowPlaying'
 import './activities.css'
 
-// ✅  ROBLOX IMAGES HERE
 const ROBLOX_IMAGES = [
-  { src: '/assets/robloximg/roblox1.jpg', caption: 'Roblox Showcase 1' },
-  { src: '/assets/robloximg/roblox2.jpg', caption: 'Roblox Showcase 2' },
-  { src: '/assets/robloximg/roblox3.jpg', caption: 'Roblox Showcase 3' },
+  { src: '/assets/robloximg/HiddenHills.jpg', caption: 'Roblox Showcase 1' },
+  { src: '/assets/robloximg/HiddenHills1.jpg', caption: 'Roblox Showcase 2' },
+  { src: '/assets/robloximg/HiddenHills2.jpg', caption: 'Roblox Showcase 3' },
 ]
 
-// PHOTOGRAPHY IMAGES HERE
 const PHOTO_IMAGES = [
   { src: '/assets/photography/photo1.jpg', caption: 'Photography 1' },
   { src: '/assets/photography/photo2.jpg', caption: 'Photography 2' },
@@ -98,25 +96,46 @@ function NowPlayingCard() {
   const [loading, setLoading] = useState(true)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const tickRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const lastTrackId = useRef<string | null>(null)
 
   const load = useCallback(async () => {
     const data = await fetchNowPlaying()
+
+    if (data?.trackId !== lastTrackId.current) {
+      lastTrackId.current = data?.trackId ?? null
+    }
+
     setTrack(data)
-    setProgressMs(data?.progressMs ?? 0)
+
+    if (data?.isPlaying) {
+      const elapsed = Date.now() - data.timestamp
+      const estimated = Math.min(data.progressMs + elapsed, data.durationMs)
+      setProgressMs(estimated)
+    } else {
+      setProgressMs(data?.progressMs ?? 0)
+    }
+
     setLoading(false)
 
-    // Tick progress every second
     if (tickRef.current) clearInterval(tickRef.current)
+
     if (data?.isPlaying) {
       tickRef.current = setInterval(() => {
-        setProgressMs(prev => Math.min(prev + 1000, data.durationMs))
+        setProgressMs(prev => {
+          const next = prev + 1000
+          if (data && next >= data.durationMs) {
+            if (tickRef.current) clearInterval(tickRef.current)
+            return data.durationMs
+          }
+          return next
+        })
       }, 1000)
     }
   }, [])
 
   useEffect(() => {
     load()
-    intervalRef.current = setInterval(load, 15000) // refresh every 15s
+    intervalRef.current = setInterval(load, 10000)
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current)
       if (tickRef.current) clearInterval(tickRef.current)
@@ -153,14 +172,12 @@ function NowPlayingCard() {
       className="np-card"
       style={{ ['--accent']: accent } as React.CSSProperties}
     >
-      {/* Blurred album art background */}
       <div
         className="np-bg"
         style={{ backgroundImage: `url(${track.albumArt})` }}
       />
       <div className="np-bg-overlay" />
 
-      {/* Animated wave bars */}
       <div className="np-waves" aria-hidden="true">
         {Array.from({ length: 28 }).map((_, i) => (
           <div
@@ -175,15 +192,12 @@ function NowPlayingCard() {
         ))}
       </div>
 
-      {/* Card content */}
       <div className="np-content">
-        {/* Album art */}
         <div className="np-art-wrapper">
           <img src={track.albumArt} alt={track.album} className="np-art" />
           <div className="np-art-glow" style={{ background: accent }} />
         </div>
 
-        {/* Info */}
         <div className="np-info">
           <div className="np-badge">
             <span className="np-dot" style={{ background: accent }} />
@@ -201,7 +215,7 @@ function NowPlayingCard() {
       </div>
     </div>
   )
-}
+} // ✅ closing brace for NowPlayingCard was missing!
 
 // ─── Main Page ───
 function Activities() {
@@ -209,14 +223,11 @@ function Activities() {
 
   return (
     <div className="activities-page">
-
-      {/* Background */}
       <div className="act-bg" />
       <div className="act-bg-overlay" />
 
       <div className="act-content">
 
-        {/* ── Section 1: Roblox Works ── */}
         <section className="act-section">
           <div className="act-section-header">
             <span className="act-section-tag">Section 01</span>
@@ -226,7 +237,6 @@ function Activities() {
           <GalleryGrid images={ROBLOX_IMAGES} onSelect={setLightbox} />
         </section>
 
-        {/* ── Section 2: Photography ── */}
         <section className="act-section">
           <div className="act-section-header">
             <span className="act-section-tag">Section 02</span>
@@ -236,7 +246,6 @@ function Activities() {
           <GalleryGrid images={PHOTO_IMAGES} onSelect={setLightbox} />
         </section>
 
-        {/* ── Section 3: Now Playing ── */}
         <section className="act-section">
           <div className="act-section-header">
             <span className="act-section-tag">Section 03</span>
@@ -248,7 +257,6 @@ function Activities() {
 
       </div>
 
-      {/* Lightbox */}
       {lightbox && (
         <Lightbox
           src={lightbox.src}
