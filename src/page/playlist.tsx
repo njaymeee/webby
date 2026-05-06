@@ -10,7 +10,7 @@ const MANUAL_PLAYLISTS: SpotifyPlaylist[] = [
     id: '1',
     name: 'Street Walk at Night',
     description: 'It was saturday night, my brother and I are walking into those streets. Just seeing the city lights, both of us are just rebellious. Collab: HY_M3S',
-    cover: './assets/spotifycovers/homeLaStreetWalk.jpg', // put your cover image in public/assets/playlists/
+    cover: 'public/playlist/homeLaStreetWalk.jpg', // put your cover image in public/assets/playlists/
     creator: 'KuwishKian.V, HY_M3S',
     songCount: 24,
     hours: 1,
@@ -21,7 +21,7 @@ const MANUAL_PLAYLISTS: SpotifyPlaylist[] = [
     id: '2',
     name: 'Driving at late night.',
     description: 'drowning myself into daydreaming, earning what I wanted became reality. the late night drives, the nostalgic song hit me so good. I wish I could comeback to my teenage years. The siblings and the circles became my comfort zone, driving along with them at night is so good.',
-    cover: './assets/spotifycovers/Car5.jpg',
+    cover: 'public/playlist/Car5.jpg',
     creator: 'HY_M3S, KuwishKian.V',
     songCount: 30,
     hours: 1,
@@ -32,7 +32,7 @@ const MANUAL_PLAYLISTS: SpotifyPlaylist[] = [
     id: '3',
     name: 'Drunk driving at night.',
     description: "“Your honor, my client doesn't want to kill the vibe.” You're right my lawyer. 😘😊✨",
-    cover: './assets/spotifycovers/Car4.jpg',
+    cover: 'public/playlist/Car4.jpg',
     creator: 'HY_M3S, KuwishKian.V',
     songCount: 34,
     hours: 2,
