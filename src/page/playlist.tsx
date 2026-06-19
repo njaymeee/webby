@@ -42,9 +42,9 @@ const MANUAL_PLAYLISTS: SpotifyPlaylist[] = [
     description: 'Just me and my cousins driving at midnight. Stimulating, vibing to the song.  I always fall in love to how dreamy the world is at night. ',
     cover: 'playlist/LosAngeles.jpg',
     creator: 'HY_M3S',
-    songCount: 25,
-    hours: 1,
-    minutes: 45,
+    songCount: 3,
+    hours: 0,
+    minutes: 9,
     spotifyUrl: 'https://open.spotify.com/playlist/3WUUEjIwFurW70QgXUOjxB',
   },
 ]
