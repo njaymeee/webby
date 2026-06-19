@@ -2,9 +2,6 @@ import { useEffect, useState } from 'react'
 import { fetchPlaylist, USE_SPOTIFY_API, type SpotifyPlaylist } from '../utils/spotify'
 import './playlist.css'
 
-// ─────────────────────────────────────────
-// ✅ MANUAL PLAYLISTS — edit these yourself
-// ─────────────────────────────────────────
 const MANUAL_PLAYLISTS: SpotifyPlaylist[] = [
   {
     id: '1',
@@ -12,9 +9,9 @@ const MANUAL_PLAYLISTS: SpotifyPlaylist[] = [
     description: 'It was saturday night, my brother and I are walking into those streets. Just seeing the city lights, both of us are just rebellious. Collab: HY_M3S',
     cover: 'playlist/homeLaStreetWalk.jpg', // put your cover image in public/assets/playlists/
     creator: 'KuwishKian.V, HY_M3S',
-    songCount: 24,
+    songCount: 27,
     hours: 1,
-    minutes: 22,
+    minutes: 32,
     spotifyUrl: 'https://open.spotify.com/playlist/1NK7dtDd3n63TveSWXdOVP',
   },
   {
@@ -23,9 +20,9 @@ const MANUAL_PLAYLISTS: SpotifyPlaylist[] = [
     description: 'drowning myself into daydreaming, earning what I wanted became reality. the late night drives, the nostalgic song hit me so good. I wish I could comeback to my teenage years. The siblings and the circles became my comfort zone, driving along with them at night is so good.',
     cover: 'playlist/Car5.jpg',
     creator: 'HY_M3S, KuwishKian.V',
-    songCount: 30,
+    songCount: 21,
     hours: 1,
-    minutes: 46,
+    minutes: 15,
     spotifyUrl: 'https://open.spotify.com/playlist/4slv9IGJWzkqxbt0naAtmk',
   },
   {
@@ -39,6 +36,17 @@ const MANUAL_PLAYLISTS: SpotifyPlaylist[] = [
     minutes: 13,
     spotifyUrl: 'https://open.spotify.com/playlist/3FGD24VPdy15NsgEHNIFHs',
   },
+  {
+    id: '4',
+    name: 'Midnight City Drives',
+    description: 'Just me and my cousins driving at midnight. Stimulating, vibing to the song.  I always fall in love to how dreamy the world is at night. ',
+    cover: 'playlist/LosAngeles.jpg',
+    creator: 'HY_M3S',
+    songCount: 25,
+    hours: 1,
+    minutes: 45,
+    spotifyUrl: 'https://open.spotify.com/playlist/3WUUEjIwFurW70QgXUOjxB',
+  },
 ]
 
 // ─────────────────────────────────────────
@@ -48,12 +56,14 @@ const PLAYLIST_IDS: string[] = [
   '1NK7dtDd3n63TveSWXdOVP',
   '3FGD24VPdy15NsgEHNIFHs',
   '4slv9IGJWzkqxbt0naAtmk',
+  '3WUUEjIwFurW70QgXUOjxB',
 ]
 
 const ACCENT_COLORS: string[] = [
   '#6e8efb',
   '#f5a623',
   '#f472b6',
+  '#3479d3',
 ]
 
 // ─── Vinyl Disc Component ───
@@ -158,14 +168,12 @@ function Playlist() {
 
   useEffect(() => {
     async function load() {
-      // ✅ Manual mode — no API needed
       if (!USE_SPOTIFY_API) {
         setPlaylists(MANUAL_PLAYLISTS)
         setLoading(false)
         return
       }
 
-      // ✅ API mode — fetch from Spotify
       try {
         setLoading(true)
         setError(null)

@@ -9,9 +9,13 @@ const ROBLOX_IMAGES = [
 ]
 
 const PHOTO_IMAGES = [
-  { src: 'photography/photo1.jpg', caption: 'Photography 1' },
-  { src: 'photography/photo2.jpg', caption: 'Photography 2' },
-  { src: 'photography/photo3.jpg', caption: 'Photography 3' },
+  { src: 'photography/mcdonalds.jpg', caption: 'Mcdonalds stuff' },
+  { src: 'photography/mcdonalds2.jpg', caption: 'foodie' },
+  { src: 'photography/morning.jpg', caption: 'sleep deprived and seeing the sunrise' },
+  { src: 'photography/sunset1.jpg', caption: 'warm of the sunset gloss.' },
+  { src: 'photography/moonlight glare.jpg', caption: 'a photo of a moon that look like a streetlight.' },
+  { src: 'photography/midnight sioree.jpg', caption: 'midnight blues of the prom night. - Junior High Prom' },
+  { src: 'photography/sm_naga.jpg', caption: 'SM Food Gallery' },
 ]
 
 // ─── Lightbox ───

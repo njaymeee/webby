@@ -14,6 +14,7 @@ function Header() {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/playlist">Playlist</Link></li>
             <li><Link to="/activities">Activities</Link></li>
+            <li><Link to="/works">Works</Link></li>
           </ul>
         </nav>
       </header>

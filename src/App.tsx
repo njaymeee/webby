@@ -17,6 +17,7 @@ const socials = {
 
 import Playlist from './page/playlist'
 import Activities from './page/activities'
+import Works from './page/works'
 
 function Home() {
 return (
@@ -34,7 +35,7 @@ return (
               </div>
             </div>
             <div className="card-right">
-              <h1 className="profile-name">Njay</h1>
+              <h1 className="profile-name">Njay Oliver</h1>
               <p className="profile-age">Age: 16</p>
               <p className="profile-bio">
                 I drowned in Daydream and Envious. Born on December 23. A sun of a Goat, A moon of a Fish, and a rising of a twin.
@@ -107,6 +108,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/playlist" element={<Playlist />} />
           <Route path="/activities" element={<Activities />} />
+          <Route path="/works" element={<Works />} />
         </Routes>
       </main>
       <Footer />
